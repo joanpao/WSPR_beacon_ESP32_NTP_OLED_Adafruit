@@ -1,43 +1,29 @@
 /*
-Programa original de WSPR Beacon by Roel Kroes
-para  microcontrolador AVR (como el ATmega328P),
-disponible en: https://github.com/RoelKroes/wsprbeacon/blob/main/WSPR_beacon_arduino.ino
-Modificado por EA5JTT Juanpa 
-20250902 V1
-- Adaptacion a Lilygo ESP32 LoRa  433MHz, compilar en Arduino IDE TLilygo T-Display
-- Ampliar la tabla de slots de frecuencias de 6 a 10 para adaptarla al International WSPR Beacon Project 
-- Inclusion de mensajes en pantalla OLED para poder controlarla sin PC 
-- Inclusion de de la correccion en la tabla de frecuencias
+Programa original de WSPR Beacon by EA5JTT Juanpa 
+- Adaptacion a Lilygo ESP32 T3 v1.6.1 OLED, compilar en Arduino IDE TLilygo T-Display
+- Adafruit SI5351 library
 
-El Si5351 saca unos 7 dBm = 5 mW y se ha comprobado que genera una señal WSPR de calidad para 
-las bandas de radioaficionado  de HF de 40, 30, 20, 18, 15, 12 y 10 m 
-No se ha probado para LF, MF y VHF
-Se ha probado con un filtro pasabajos de 30 MHz
-Se quiere probar con un amplificador de potencia 
+El Si5351 obtiene
+- unos 7 dBm = 5 mW 
+- Se ha probado con exito 
+    - para WSPR en las bandas de radioaficionado de HF de 80, 60, 40, 30, 20, 18, 15, 12 y 10 m 
+    - usando un filtro pasabajos de 30 MHz
+    - con un LNA como amplificador de potencia con una tenuador previo para evitar distorision por saturacion
 */
-/*
-  WSPR Beacon - Adaptado a Adafruit_SI5351
-  EA5JTT 2025
-  Salida por CLK2 usando setupMultisynth()
-*/
+
 // messages.ino
 typedef struct {
   bool sendMsg1 = false;
-
   // Maidenhead (locator)
   char MH_1[5] = {'A','A','0','0','\0'};
-
   // Power in dBm
   uint8_t dbm_1 = 23;
-
   // Time fields
   int Hours = 0;
   int Minutes = 0;
   int Seconds = 0;
-
   // GPS / NTP time validity flag
   bool GPS_valid = false;
-
 } TGPS;
 
 // ======== Variable global ========
@@ -89,6 +75,7 @@ NTPClient timeClient(ntpUDP, "pool.ntp.org", 0, 60000);
 // ---------- Globals ----------
 volatile bool proceed = false;
 unsigned long long freq = 0ULL;   // frecuencia en Hz
+// AQUI DEBE PONER SU QTH LOCATOR
 char MaidenHeadLocal[5] = { 'I','M','9','9', 0 };
 uint8_t dbm_local = DBMPOWER;
 esp_timer_handle_t periodic_timer;
