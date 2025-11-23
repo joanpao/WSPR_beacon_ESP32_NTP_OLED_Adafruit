@@ -93,6 +93,7 @@ If you don't have a license, obtaining one is recommended — in many places it 
 
 A detailed Spanish article is available here:  
 https://ea5jtt.blogspot.com/2025/09/wspr-tx-beacon-esp32-si5351-version-ntp.html
+https://ea5jtt.blogspot.com/2025/09/si5351-primeros-pasos.html
 
 ---
 
