@@ -10,7 +10,7 @@
 
 // Your own HAM call. Change it
 // Modifico por mi indicativo
-#define MYCALL "EA5JTT"
+#define MYCALL "XXXXX"
 
 // The power of your transmission in dBm. 
 // for the si5351 this should be set to 10 (=10 milliwatts) 7dBm
@@ -41,11 +41,12 @@
 * por algun motivo el ajuste de 2660 Hz para 18MHZ se convierte en 1160 ¿?
 ************************************************************************************/
 
-
-char MaidenHead[7] = "IM99tl";
-
-const char* ssid = "TP-Link_7254";
-const char* password = "63341379";
+// SU QTH LOCATOR
+char MaidenHead[7] = "XXXX";
+// SU WIFI SSID
+const char* ssid = "XXXX";
+// SU WIFI PASSWORD 
+const char* password = "XXXX";
 
 /***********************************************************************************
 * FRECUENCIAS WSPR 
